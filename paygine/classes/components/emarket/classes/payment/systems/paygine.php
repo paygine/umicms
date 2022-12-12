@@ -140,7 +140,7 @@
             if ($orderActualPrice != $amount) {
                 throw new Exception("Wrong order amount");
             }
-            if ($response['type'] == 'PURCHASE' && $response['state'] == 'APPROVED'){
+            if (($response['type'] == 'PURCHASE' || $response['type'] == 'PURCHASE_BY_QR' || $response['type'] == 'AUTHORIZE') && $response['state'] == 'APPROVED'){
                	$this->order->setPaymentStatus('accepted');
                 $this->order->payment_document_num = $operationId;
                 $this->order->commit();
